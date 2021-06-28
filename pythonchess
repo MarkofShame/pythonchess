@@ -1,0 +1,47 @@
+import pygame
+import matplotlib
+import sys
+from pygame.locals import *
+import matplotlib.colors
+
+pygame.init()
+
+FPS = 30
+FramePerSec = pygame.time.Clock()
+
+user_interface = pygame.display.set_mode((600, 600))
+pawn_x = 150
+pawn_y = 450
+
+while True:
+    pygame.time.delay(100)
+    events = pygame.event.get()
+    # TODO explore turning the if statements in the following for loop into a single dictionary
+    for event in events:
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        #if event.type == pygame.MOUSEBUTTONDOWN:
+            #pawn_x, pawn_y = pygame.mouse.get_pos()
+
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_ESCAPE]:
+        pygame.quit()
+        sys.exit()
+    mouse = pygame.mouse.get_pressed()
+    if mouse[pygame.MOUSEBUTTONDOWN]:
+        pawn_x, pawn_y = pygame.mouse.get_pos()
+
+    # TODO if statement to deselect piece
+    # TODO if statement to select a piece on click
+    # TODO if statement to move piece on click
+    user_interface.fill("white")
+    pygame.draw.rect(user_interface, "plum", (0, 0, 300, 300))
+    pygame.draw.rect(user_interface, "yellow", (300, 0, 300, 300))
+    pygame.draw.rect(user_interface, "coral", (0, 300, 300, 300))
+    pygame.draw.rect(user_interface, "slateblue", (300, 300, 300, 300))
+    pawn = pygame.draw.circle(user_interface, "white", (pawn_x, pawn_y), 100)
+
+    pygame.display.update()
+    FramePerSec.tick(FPS)
